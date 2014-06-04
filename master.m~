@@ -2,39 +2,41 @@
 clear all;
 
 
-res=0.13; % this is determined by the microscopes, it is 0.2125 if you have 0.2125 microns per pixel, 0.1417 for spn
+res=0.11; % this is determined by the microscopes, it is 0.2125 if you have 0.2125 microns per pixel, 0.1417 for spn
 
 
 %%Loading the data
-load('/Users/eesh/Desktop/video_analysis_data/rok_inhibitor_injection/Image5_011113/Measurements/Membranes--vertices--Vertex-x.mat');
+load('/Users/eesh/Desktop/video_analysis_data/water_injection/Image5_121813/Measurements/Membranes--vertices--Vertex-x.mat');
 datax=data;
 cell_number=size(datax,3); % This just assigns 109 to the cel_number for the given file
-load('/Users/eesh/Desktop/video_analysis_data/rok_inhibitor_injection/Image5_011113/Measurements/Membranes--vertices--Vertex-y.mat'); %this loads the y 
+load('/Users/eesh/Desktop/video_analysis_data/water_injection/Image5_121813/Measurements/Membranes--vertices--Vertex-y.mat'); %this loads the y 
 datay=data;
 
 cell_number=size(datay,3); % This just assigns 109 to the cel_number for the given file
 
 
+datax{1,1,50}
 
-
-for time=1:60,
+%nox_vertices=zeros(1,cell_number);
+%for i=1:cell_number,
+%    nox_vertices(i) = size(data{1,1,i},1); %this is
+%end
+%nox_vertices;
+for time=1:40,
 entropy=[];
 %%sprintf is awesome!
-image_path=strcat('/Users/eesh/Desktop/video_analysis_data/rok_inhibitor_injection/Image5_011113/Myosin/Image5_011113_t',sprintf('%03d',time),'_z008_c001.tif')  ;  
+image_path=strcat('/Users/eesh/Desktop/video_analysis_data/water_injection/Image5_121813/Myosin/Image5_121813_t',sprintf('%03d',time),'_z006_c001.tif')  ;  
 A=imread(image_path); 
 A_hold=A;
 
-%imshow(A);
+imshow(A);
 A=double(A);
 
 
 
 for cell_index=1:cell_number, %this mega for loop calculates the COM for all the cells which are taken from the edge output
-  
-    %%if for NAN check
-  if(~isnan(datax{1,1,cell_index})) 
     
-     tx = datax{1,1,cell_index}'./res;
+  tx = datax{1,1,cell_index}'./res;
 
     ty = datay{1,1,cell_index}'./res;
 
@@ -67,9 +69,7 @@ for cell_index=1:cell_number, %this mega for loop calculates the COM for all the
     ln(~isfinite(ln))=0;
     
     entropy= [ entropy ; ( -ln)' * (probability)];
-   
-  %%if for nan check ends here  
-  end
+    
   
 end
 
@@ -78,13 +78,13 @@ E(time).entropy=entropy;
 end
 
 %%
-%load('water_image5');
+%load('roki_image5');
 
 test=[];
 
 for t=1:60,
    
-    test=[test;E(t).entropy(12)];
+    test=[test;E(t).entropy(50)];
     
 end
 

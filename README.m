@@ -1,3 +1,6 @@
+%% 
+%%Rok Inhibitor Injections
+
 if 0
 Image1_011113
 xy = 0.13
@@ -17,4 +20,34 @@ t = 24.3
 edged membrane = z007
 injected frame = 1
 
+end
+
+
+%% 
+%%Water Injections
+
+if 0
+   
+%    
+Image21_121813:
+xy = 0.13
+z = 0.92
+t = 7.8
+
+z-membrane = 7
+trange = 1:42
+injection at t = 30
+
+
+%
+Image5_121813
+xy = 0.11
+z = 0.91
+t = 6.9
+
+z-membrane = 6
+trange = 1:40
+injection at t = 22     
+    
+    
 end
