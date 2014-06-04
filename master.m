@@ -23,7 +23,6 @@ entropy=[];
 image_path=strcat('/Users/eesh/Desktop/video_analysis_data/rok_inhibitor_injection/Image5_011113/Myosin/Image5_011113_t',sprintf('%03d',time),'_z008_c001.tif')  ;  
 A=imread(image_path); 
 A_hold=A;
-
 %imshow(A);
 A=double(A);
 
@@ -77,14 +76,15 @@ E(time).entropy=entropy;
 
 end
 
+
 %%
-%load('water_image5');
+load('roki_image5');
 
 test=[];
 
 for t=1:60,
    
-    test=[test;E(t).entropy(12)];
+    test=[test;E(t).entropy(15)];
     
 end
 
