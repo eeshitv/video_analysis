@@ -21,14 +21,14 @@ time_number=size(datay,1);
 
 
 
-for time=1:time_number,
+for time=30,
 area=[];
 %%sprintf is awesome!
 image_path=strcat('/Users/eesh/Desktop/video_analysis_data/rok_inhibitor_injection/Image5_011113/Myosin/Image5_011113_t',sprintf('%03d',time),'_z008_c001.tif')  ;  
 A=imread(image_path); 
 A_hold=A;
-%imshow(A);
-%hold on
+imshow(A);
+hold on
 A=double(A);
 
 score=0;
@@ -106,13 +106,13 @@ end
 
 %%
 %load('roki_image5');
-if 1
+if 0
 
 test=[];
 
 for t=1:time_number,
    
-    test=[test ; E(t).area(2)];
+    test=[test ; E(t).area(1)];
     
 end
 
