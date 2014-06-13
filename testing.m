@@ -1,5 +1,5 @@
 
-load('roki_image_area');
+load('water_image_area');
 
 
 for time=1:time_number,
@@ -32,7 +32,7 @@ for time=1:time_number,
     hold on;    
         
     end
-       filename=strcat('/Users/eesh/Desktop/eesh_summer_14/Documentation/Area_metric_June9toJune19/video_center/','centerofmass_roki_image',num2str(time));   
+       filename=strcat('/Users/eesh/Desktop/eesh_summer_14/Documentation/Area_metric_June9toJune19/video_center/','centerofmass_water_image',num2str(time));   
     saveas(gca,filename,'tif');
     hold off
 
