@@ -57,7 +57,7 @@ for cell_index=1:cell_number, %this mega for loop calculates the COM for all the
    
    run('/Users/eesh/Desktop/video_analysis/radial_distribution.m');
 
-  
+  E(time).cell=cell;
      
     %%PROBABILITY USING IMHIST
     %%CUTTING INTO POLYGONS
