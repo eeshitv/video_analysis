@@ -1,6 +1,15 @@
- tx = datax{time,1,cell_index}'./res;
+   
+%now i just need to use the vertices(i already know how to access them, i
+%just have to use roipoly with vertices and i am done.
+%%
 
-    ty = datay{time,1,cell_index}'./res;
+%%THe center of mass is stored in the variables COM_X and COM_Y and an
+%%image is outputed by the program(the tiny red dot is the center of mass)
+
+  %just enter the image file, make sure you enter the file is added to MATLAB's path
+ tx = datax{1,1,cell_index}'./res;
+
+    ty = datay{1,1,cell_index}'./res;
 
      vert_cell=size(tx,2);
    t_poly=zeros(vert_cell,2);
@@ -11,23 +20,18 @@
    end
 
    t_poly;
-    
-%now i just need to use the vertices(i already know how to access them, i
-%just have to use roipoly with vertices and i am done.
-%%
 
-
-%%THe center of mass is stored in the variables COM_X and COM_Y and an
-%%image is outputed by the program(the tiny red dot is the center of mass)
-
-  %just enter the image file, make sure you enter the file is added to MATLAB's path
-    
+   
     BW=roipoly(A,tx,ty);
+  
     BW=double(BW);
+  
+    %%DO NOT CHANGE THIS SECTION PLEASE, index exceeds is because of this 
+    A=double(A);
+    %%
     SE = strel('octagon',3);
     BW = imerode(BW,SE);    %eroding the edges
     cell(cell_index).ANS=BW.*A;
-    %imshow(ANS);
     g = mat2gray(cell(cell_index).ANS);
     ANS = im2bw(g, threshold);
 cell(cell_index).ANS=uint8(cell(cell_index).ANS); %we can now use this to plot whatever cell we want!
@@ -53,6 +57,7 @@ cell(cell_index).ANS=uint8(cell(cell_index).ANS); %we can now use this to plot w
         COM_X= j*X(j)+COM_X;
     end
     
+   
     COM_X=COM_X/SUM_X;
     
 
@@ -102,3 +107,5 @@ cell(cell_index).ANS=uint8(cell(cell_index).ANS); %we can now use this to plot w
 %imshow(ANS);
 %hold on;
 %tx and ty are the vertices' x and y coordinates for the cell corresponding to this loops iteration in a vertex form)
+
+

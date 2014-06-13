@@ -1,5 +1,21 @@
 
-intersect=intersectLinePolygon(line, t_poly);
+tx = datax{time,2,cell_index}'./res;
+
+    ty = datay{time,2,cell_index}'./res;
+
+     vert_cell=size(tx,2);
+   t_poly=zeros(vert_cell,2);
+
+   for i=1:vert_cell,
+       t_poly(i ,1)=tx(i);
+       t_poly(i ,2)=ty(i);
+   end
+
+   t_poly;
+   
+
+   
+   intersect=intersectLinePolygon(line, t_poly);
        
   %%THe plotting of lines takes a long time and is unnecessary now so i am
   %%commenting this part of the code
