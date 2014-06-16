@@ -76,7 +76,7 @@ for cell_index=1:cell_number, %this mega for loop calculates the COM for all the
         x=[1:1:size(cell(cell_index).mean,1)];
         %p=polyfit(x,y,10);
     
-        f = y ;%polyval(p,x);
+      %  f = polyval(p,x);
 
        %%horizontal line intersection part
 y1=2*ones(1,size(f,2));
@@ -104,7 +104,7 @@ end
 
 %%
 %load('roki_image5');
-if 0
+if 1
 
 test=[];
 

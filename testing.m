@@ -4,7 +4,7 @@ load('water_image_area');
 
 for time=1:time_number,
 
-    image_path=strcat('/Users/eesh/Desktop/video_analysis_data/rok_inhibitor_injection/Image5_011113/Myosin/Image5_011113_t',sprintf('%03d',time),'_z008_c001.tif')  ;  
+    image_path=strcat('/Users/eesh/Desktop/video_analysis_data/water_injection/Image21_121813/Myosin/Image21_121813_t',sprintf('%03d',time),'_z008_c001.tif')  ;  
     A=imread(image_path); 
     imshow(A);
     hold on;
@@ -28,12 +28,12 @@ for time=1:time_number,
     plot(E(time).cell(cell_index).COM_X, E(time).cell(cell_index).COM_Y, 'rx');
     h = fill(tx,ty,'r');
     set(h,'FaceColor','None');
- 
+    text(E(time).cell(cell_index).COM_X, E(time).cell(cell_index).COM_Y,num2str(cell_index));
     hold on;    
         
     end
        filename=strcat('/Users/eesh/Desktop/eesh_summer_14/Documentation/Area_metric_June9toJune19/video_center/','centerofmass_water_image',num2str(time));   
-    saveas(gca,filename,'tif');
+    saveas(gca,filename,'fig');
     hold off
 
      

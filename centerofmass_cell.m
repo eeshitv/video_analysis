@@ -26,10 +26,13 @@
     BW=double(BW);
     SE = strel('octagon',3);
     BW = imerode(BW,SE);    %eroding the edges
+     A=double(A);
+    
     cell(cell_index).ANS=BW.*A;
     %imshow(ANS);
     g = mat2gray(cell(cell_index).ANS);
     ANS = im2bw(g, threshold);
+
 cell(cell_index).ANS=uint8(cell(cell_index).ANS); %we can now use this to plot whatever cell we want!
 %% This part of the code is for finding the x coordinate of the center of mass
 %ANS is the variable with the image that has been cut using roipoly
