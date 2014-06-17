@@ -1,7 +1,7 @@
           
-     tx = datax{time,1,cell_index}'./res;
+     tx = datax{time,2,cell_index}'./res;
 
-    ty = datay{time,1,cell_index}'./res;
+    ty = datay{time,2,cell_index}'./res;
 
      vert_cell=size(tx,2);
    t_poly=zeros(vert_cell,2);

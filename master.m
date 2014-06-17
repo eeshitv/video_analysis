@@ -2,16 +2,16 @@
 clear all;
 
 res=0.13; % this is determined by the microscopes, it is 0.2125 if you have 0.2125 microns per pixel, 0.1417 for spn
-threshold=0.85;
+threshold=0.80;
 
 %%Loading the data
-load('/Users/eesh/Desktop/video_analysis_data/water_injection/Image21_121813/Measurements/Membranes--vertices--Vertex-x.mat');
+load('/Users/eesh/Desktop/video_analysis_data/roki_injection/Image5_011113/Measurements/Membranes--vertices--Vertex-x.mat');
 datax=data;
-cell_number=size(datax,3); % This just assigns 109 to the cel_number for the given file
-load('/Users/eesh/Desktop/video_analysis_data/water_injection/Image21_121813/Measurements/Membranes--vertices--Vertex-y.mat'); %this loads the y 
+cell_number=size(datax,3); %    W11 This just assigns 109 to the cel_number for the given file
+load('/Users/eesh/Desktop/video_analysis_data/roki_injection/Image5_011113/Measurements/Membranes--vertices--Vertex-y.mat'); %this loads the y 
 datay=data;
 
-load('/Users/eesh/Desktop/video_analysis_data/water_injection/Image21_121813/Measurements/Membranes--basic_2d--Area.mat'); %this loads the y 
+load('/Users/eesh/Desktop/video_analysis_data/roki_injection/Image5_011113/Measurements/Membranes--basic_2d--Area.mat'); %this loads the y 
 area=data;
 
 
@@ -24,7 +24,7 @@ time_number=size(datay,1);
 for time=1:time_number,
 area=[];
 %%sprintf is awesome!
-image_path=strcat('/Users/eesh/Desktop/video_analysis_data/water_injection/Image21_121813/Myosin/Image21_121813_t',sprintf('%03d',time),'_z007_c001.tif')  ;  
+image_path=strcat('/Users/eesh/Desktop/video_analysis_data/roki_injection/Image5_011113/Myosin/Image5_011113_t',sprintf('%03d',time),'_z008_c001.tif')  ;  
 A=imread(image_path); 
 A_hold=A;
 %imshow(A);
@@ -36,11 +36,11 @@ score=0;
 for cell_index=1:cell_number, %this mega for loop calculates the COM for all the cells which are taken from the edge output
   
     %%if for NAN check
-  if(~isnan(datax{time,1,cell_index})) 
+  if(~isnan(datax{time,2,cell_index})) 
           
-     tx = datax{time,1,cell_index}'./res;
+     tx = datax{time,2,cell_index}'./res;
 
-    ty = datay{time,1,cell_index}'./res;
+    ty = datay{time,2,cell_index}'./res;
 
      vert_cell=size(tx,2);
    t_poly=zeros(vert_cell,2);

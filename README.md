@@ -5,12 +5,12 @@ This repository deals with live images(the image_analysis repository deals with 
 
 WATER : 
 
-Image21_121813:
+Image21_121813: (IGNORE CELLS 17,25,16...show the documentation, ignore_reason_image21 video)
 xy = 0.13
 z = 0.92
 t = 7.8
 
-z-membrane = 7
+z-membrane = 7 (in data this is data{time,2,cell_index} ) 
 trange = 1:42
 injection at t = 30
 
