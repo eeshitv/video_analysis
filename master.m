@@ -2,7 +2,7 @@
 clear all;
 
 res=0.13; % this is determined by the microscopes, it is 0.2125 if you have 0.2125 microns per pixel, 0.1417 for spn
-threshold=0.80;
+threshold=0.8;
 
 %%Loading the data
 load('/Users/eesh/Desktop/video_analysis_data/roki_injection/Image5_011113/Measurements/Membranes--vertices--Vertex-x.mat');
@@ -59,6 +59,7 @@ for cell_index=1:cell_number, %this mega for loop calculates the COM for all the
 
   E(time).cell=cell;
      
+    
     BW=roipoly(A,tx,ty);
     BW=double(BW);
    % SE = strel('octagon',3);
@@ -66,6 +67,8 @@ for cell_index=1:cell_number, %this mega for loop calculates the COM for all the
     
     ANS=BW.*A;
     
+    
+   if 0%blah
     [rmx,t]=max(cell(cell_index).mean);
     %[rmn,t]=min(cell_rok(cell_index).mean);
     
@@ -92,13 +95,17 @@ trap=trapz(f);% - 2*(px-1);
 
     
     area= [ area ; trap ];
+   end %blah
+   
+   
+   
    
   %%if for nan check ends here  
   end
   
 end
 
-E(time).area=area;
+%E(time).area=area;
 
 end
 
@@ -121,3 +128,4 @@ hx_1 = graph2d.constantline(22, 'Color',[1 0 0]);
 changedependvar(hx_1,'x');
 
 end
+

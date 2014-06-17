@@ -34,7 +34,7 @@ x=[cell(cell_index).COM_X intersect(2,1)];
 y=[cell(cell_index).COM_Y intersect(2,2)];
      end
      
-[cx,cy,C_temp]=improfile(A,x,y,'bilinear');
+[cx,cy,C_temp]=improfile(ANS,x,y,'bilinear');
 
 [c,i_line]=max(C_temp(:,:)); %%use the new customized maxima function if you dont care about time
 MAX=[MAX; cx(i_line) , cy(i_line)];
