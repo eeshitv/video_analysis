@@ -1,7 +1,4 @@
-%%
-q = mat2gray(cell(cell_index).ANS);
-ANS = im2bw(q, 0.8);
-%%
+
 %%t_poly manually added
 
 tx = datax{time,1,cell_index}'./res;
@@ -49,7 +46,7 @@ MAX=[];%%THis variable makes the maximum intensity matrix 0
     %%PADDING logical 0s to make it easy to find the OR 
     C=[];
      for q=1:32,
-         TEMP(q).C = vertcat(TEMP(q).C ,zeros(max_index-size(TEMP(q).C ,1),1));
+         TEMP(q).C = vertcat(TEMP(q).C ,NaN(max_index-size(TEMP(q).C ,1),1));
          C=[C TEMP(q).C ];
      end
 
@@ -60,14 +57,7 @@ MAX=[];%%THis variable makes the maximum intensity matrix 0
      
     mean_C = nanmean(C,2);
     stdev_C = nanstd(C',1);
-     %%   
-    mean_C=zeros(size(C,1),1);
-    
-    for i=1:size(C,2),
-        mean_C= mean_C | C(:,i) ;
-        
-    end
-    %%
+   
     cell(cell_index).index = cell_index;
     cell(cell_index).mean = mean_C;
     cell(cell_index).C = C;

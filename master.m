@@ -11,8 +11,11 @@ cell_number=size(datax,3); %    W11 This just assigns 109 to the cel_number for 
 load('/Users/eesh/Desktop/video_analysis_data/roki_injection/Image5_011113/Measurements/Membranes--vertices--Vertex-y.mat'); %this loads the y 
 datay=data;
 
-load('/Users/eesh/Desktop/video_analysis_data/roki_injection/Image5_011113/Measurements/Membranes--basic_2d--Area.mat'); %this loads the y 
-area=data;
+load('/Users/eesh/Desktop/video_analysis_data/roki_injection/Image5_011113/Measurements/Membranes--basic_2d--Centroid-x.mat'); %this loads the y 
+dataxc=data;
+
+load('/Users/eesh/Desktop/video_analysis_data/roki_injection/Image5_011113/Measurements/Membranes--basic_2d--Centroid-y.mat'); %this loads the y 
+datayc=data;
 
 
 
@@ -53,7 +56,10 @@ for cell_index=1:cell_number, %this mega for loop calculates the COM for all the
    t_poly;
    
        
-   run('/Users/eesh/Desktop/video_analysis/centerofmass_cell');
+   %run('/Users/eesh/Desktop/video_analysis/centerofmass_cell');
+   
+   cell(cell_index).COM_X=dataxc{time,2,cell_index}/res;
+    cell(cell_index).COM_Y=datayc{time,2,cell_index}/res;
    
    run('/Users/eesh/Desktop/video_analysis/radial_distribution.m');
 
@@ -67,8 +73,8 @@ for cell_index=1:cell_number, %this mega for loop calculates the COM for all the
     
     ANS=BW.*A;
     
-    
-   if 0%blah
+    avg_int=mean(mean(A,1),2); %%average intensity for each cell/ CONSIDER USING TOTAL AVERAGE INTENSITY AT A GIVEN POINT IN TIME, MORE STABLE
+
     [rmx,t]=max(cell(cell_index).mean);
     %[rmn,t]=min(cell_rok(cell_index).mean);
     
@@ -82,20 +88,21 @@ for cell_index=1:cell_number, %this mega for loop calculates the COM for all the
         f = y ;%polyval(p,x);
 
        %%horizontal line intersection part
-y1=2*ones(1,size(f,2));
+y1=(2)*ones(1,size(f,2)); %%changed scaling factor
 y2=y;
 idx = find(y1 - y2 < eps, 1,'last'); %// Index of coordinate in array
 px = x(idx);
 py = y1(idx);
 %
 
-f=f(:,1:px);
-trap=trapz(f);% - 2*(px-1);
+
+%f=f(:,1:px);
+trap=avg_int*trapz(f);% - 2*(px-1);
     
 
     
     area= [ area ; trap ];
-   end %blah
+  
    
    
    
@@ -105,26 +112,25 @@ trap=trapz(f);% - 2*(px-1);
   
 end
 
-%E(time).area=area;
+E(time).area=area;
 
 end
 
 %%
-%load('roki_image5');
-if 0
-
+load('roki_image5_area_centroid_fullcell_fullimagenormalize_areafullmultiply');
+if 1
 test=[];
 
 for t=1:time_number,
    
-    test=[test ; E(t).area(2)];
+    test=[test ; E(t).area(40)];
     
 end
 
 scatter([1:1:size(test)],test)
 xlabel('TIME');
 ylabel('Area');
-hx_1 = graph2d.constantline(22, 'Color',[1 0 0]);
+hx_1 = graph2d.constantline(30, 'Color',[1 0 0]);
 changedependvar(hx_1,'x');
 
 end
