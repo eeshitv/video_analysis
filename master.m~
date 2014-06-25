@@ -27,7 +27,7 @@ A=double(A);
 
 
 
-for cell_index=1:cell_number, 
+for cell_index=1%:cell_number, 
   
     %%if for NAN check
   if(~isnan(datax{time,2,cell_index})) 
@@ -57,14 +57,10 @@ for cell_index=1:cell_number,
     
     %%converting from absolute values to values between zero and one
     g = mat2gray(E(time).cell(cell_index).ANS);
-    E(time).cell(cell_index).g=g;
     %
     
 %%storing histogram into for each cell at each point in time before thresholding    
-E(time).cell(cell_index).histogram_normalized=imhist(g);
-
-E(time).cell(cell_index).histogram=imhist(E(time).cell(cell_index).ANS);
-
+E(time).cell(cell_index).histogram=imhist(g);
 %
 
 
@@ -73,20 +69,25 @@ E(time).cell(cell_index).histogram=imhist(E(time).cell(cell_index).ANS);
 
 %%%%%%%%%%%%%%%%%%%THRESHOLD LOOP%%%%%%%%%%%%%%%%%%%%%%%%%
    threshold_fn=[];
-   for threshold=0.05:0.05:1,
+   for threshold=0:0.05:1,
 
        into_bw = im2bw(g, threshold);
        [L,num] = bwlabel(into_bw);
-        
-    %%20 is multiplied only because we need to have the indices as
-    %%integers(but the size of the array which is 20 does not change
-    E(time).cell(cell_index).structure(uint8(20*threshold)).num=num;    
+        %num contains the number of discrete structures as a function of
+        %the threshold
+   
+    
+    threshold_fn = [ threshold_fn  num ];
+    
     %%finding the area of each of these structures
     
     for w=1:num
-        E(time).cell(cell_index).structure(uint8(20*threshold)).area(w) = bwarea(L==w);
+        area(w) = bwarea(L==w);
     end
-  
+    area
+    
+    E(time).cell(cell_index).threshold_fn = threshold_fn;
+
   
    end
 %%%%%%%%%%%%%%%%%%%THRESHOLD LOOP%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -110,9 +111,9 @@ end
 
 %%
 %load('roki_image5_area_centroid_fullcell_fullimagenormalize_areafullmultiply');
-if 0
+if 1
 
-imhist(uint8(E(60).cell(1).ANS))
+imhist(uint8(E(35).cell(1).ANS))
 ylim([1 1000])
 scatter(0:0.05:1,E(1).cell(1).threshold_fn)
 xlabel('threshold');
@@ -123,4 +124,3 @@ ylabel('num');
 
 end
 
-%% you must save E using save -v7.3 blahblah
